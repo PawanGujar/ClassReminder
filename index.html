@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Class Reminder — Teacher & Student</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>Class Reminder</h1>
+        <div class="small muted">Reminders & quick info for teachers and students</div>
+      </div>
+      <div class="controls">
+        <label class="small" style="margin:0 6px 0 0">Role</label>
+        <select id="roleSelect">
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
+        <button id="btnRequestNotif"><span class="icon">🔔</span>Enable Notifications</button>
+        <button id="btnLoadSample"><span class="icon">📥</span>Load Sample</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="small">Local time</div>
+              <div class="clock" id="clock">--:--:--</div>
+            </div>
+            <div style="text-align:right">
+              <div class="small">Upcoming</div>
+              <div class="pill" id="upcomingCount">0 classes</div>
+            </div>
+          </div>
+
+          <hr style="border:none;height:12px;">
+
+          <div class="next card" id="nextCard" style="background:transparent;padding:0">
+            <div class="small muted">Next class</div>
+            <div id="nextInfo" style="font-size:16px;font-weight:700">No upcoming class</div>
+            <div id="countdown" class="small muted">—</div>
+            <div style="margin-top:8px;display:flex;gap:8px">
+              <button id="snoozeBtn"><span class="icon">😴</span>Snooze 5m</button>
+              <button id="goNowBtn"><span class="icon">➡️</span>Go to class</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="small">Timetable</div>
+              <div style="font-weight:700">Your classes</div>
+            </div>
+            <div class="small muted">Sorted by start time</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <form id="addForm">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <div style="flex:2">
+                  <label>Title</label>
+                  <input id="title" placeholder="e.g. Math - Grade 7" required />
+                </div>
+                <div style="flex:1">
+                  <label>Start</label>
+                  <input id="startTime" type="time" required />
+                </div>
+                <div style="flex:1">
+                  <label>End</label>
+                  <input id="endTime" type="time" required />
+                </div>
+                <div style="flex:1">
+                  <label>Visibility</label>
+                  <select id="visibility">
+                    <option value="both">Both</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                  </select>
+                </div>
+                <div style="flex:1">
+                  <label>Notify (mins)</label>
+                  <input id="notifyMins" type="number" min="0" value="5" />
+                </div>
+              </div>
+              <label>Repeat on days:</label>
+              <div class="day-select" id="daySelect">
+                <label><input type="checkbox" value="0" checked> Sun</label>
+                <label><input type="checkbox" value="1" checked> Mon</label>
+                <label><input type="checkbox" value="2" checked> Tue</label>
+                <label><input type="checkbox" value="3" checked> Wed</label>
+                <label><input type="checkbox" value="4" checked> Thu</label>
+                <label><input type="checkbox" value="5" checked> Fri</label>
+                <label><input type="checkbox" value="6" checked> Sat</label>
+              </div>
+              <div style="margin-top:8px;display:flex;gap:8px">
+                <input id="location" placeholder="Location / Classroom (optional)" />
+                <button type="submit"><span class="icon">➕</span>Add / Save</button>
+                <button type="button" id="clearAll" class="danger"><span class="icon">🗑</span>Clear all</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="classes-list" id="classesList"></div>
+        </div>
+      </main>
+
+      <aside>
+        <div class="card">
+          <div class="small">Info & tips</div>
+          <ul class="small muted">
+            <li>Grant notification permission in your browser (button above).</li>
+            <li>Notifications work best on HTTPS or localhost.</li>
+            <li>Use <strong>Load Sample</strong> to see how it behaves.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div class="small">Quick settings</div>
+          <div style="margin-top:8px">
+            <label>Auto-check interval (seconds)</label>
+            <input id="intervalInput" type="number" min="5" value="15" />
+          </div>
+          <div style="margin-top:8px">
+            <label>Default reminder (mins)</label>
+            <input id="defaultReminder" type="number" min="0" value="5" />
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      Tip: you can edit times, visibility, and the notify offset.
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
